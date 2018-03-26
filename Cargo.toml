@@ -1,0 +1,6 @@
+[package]
+name = "blog"
+version = "0.1.0"
+authors = ["csmoe <35686186+csmoe@users.noreply.github.com>"]
+
+[dependencies]
