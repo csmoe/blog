@@ -10,4 +10,3 @@
 //! * `#[path]` is specified, e.g. `#[path = "foo.rs"] mod foo;`.
 //!
 //! [RFC: 0063-module-file-system-hierarchy](https://github.com/rust-lang/rfcs/blob/master/text/0063-module-file-system-hierarchy.md)
-
