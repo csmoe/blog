@@ -42,4 +42,3 @@
 //! [RFC: 0387-higher-ranked-trait-bounds](https://github.com/rust-lang/rfcs/blob/master/text/0387-higher-ranked-trait-bounds.md)
 
 struct RFCs(i32);
-
