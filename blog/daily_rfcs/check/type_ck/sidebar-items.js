@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["_0034_bounded_type_parameters","Check all types for well-formedness with respect to the bounds of type variables."],["_0803_type_ascription","Add type ascription to expressions."]]});

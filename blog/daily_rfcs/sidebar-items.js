@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["attributes","RFCs about attributes"],["check","RFCs about check(type, borrow)."],["etc","Unsorted RFCs"],["keywords","RFCs about rust-lang keywords."],["matching","RFCs about pattern match."],["trait_sys","RFCs about Rust trait system."],["visibility","RFCs about visibility and privacy"]]});
