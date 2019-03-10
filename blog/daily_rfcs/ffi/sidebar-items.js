@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["_2137_variadic","Support defining C-compatible variadic functions in Rust."]]});
