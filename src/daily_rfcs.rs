@@ -7,5 +7,6 @@ pub mod etc;
 pub mod ffi;
 pub mod keywords;
 pub mod matching;
+pub mod mem;
 pub mod trait_sys;
 pub mod visibility;
