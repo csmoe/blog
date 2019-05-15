@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["_0079_undefined_struct_layout","Leave structs with unspecified layout by default like enums."]]});
