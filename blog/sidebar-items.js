@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["daily_rfcs","Read RFCs everyday"]]});
+initSidebarItems({"mod":[["about_me","About me"],["daily_rfcs","Read RFCs everyday"]]});
