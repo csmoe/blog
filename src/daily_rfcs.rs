@@ -1,4 +1,4 @@
-//! Read [RFCs](https://github.com/rust-lang/rfcs.git) everyday
+//! Read [RFCs](https://github.com/rust-lang/rfcs.git) *everyday*
 
 // Sorted rfcs
 pub mod attributes;
