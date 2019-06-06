@@ -1,0 +1,34 @@
+cache: cargo
+before_cache:
+    - find ./target/debug -maxdepth 1 -type f -delete
+    - rm -fr ./target/debug/{deps,.fingerprint}/{*ra_*,*test*,*gen_lsp*,*thread_worker*}
+    - rm -f  ./target/.rustc_info.json
+
+matrix:
+    include:
+        - os: linux
+          dist: xenial
+          if: branch = master AND type = push
+          before_script:
+              - DEPLOY_DOCS=1
+          language: rust
+          rust: nightly
+          script:
+              - cargo doc --all --no-deps
+
+branches:
+    only:
+        - master
+
+deploy:
+    provider: pages
+    skip-cleanup: true
+    github-token: $DOCS_TOKEN  # Set in the settings page of your repository, as a secure variable
+    keep-history: true
+    local-dir: target/doc
+    keep_history: true
+    fqdn: rustacean.org
+    branch: gh-pages
+    on:
+        branch: master
+condition: $DEPLOY_DOCS = 1
