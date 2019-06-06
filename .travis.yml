@@ -15,6 +15,7 @@ matrix:
           rust: nightly
           script:
               - cargo doc --all --no-deps
+              - touch target/doc/.nojekyll
 
 branches:
     only:
