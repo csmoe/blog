@@ -36,10 +36,6 @@ jobs:
         absolute_build_dir: false
         # If enabled, the content of symbolic links will be copied
         follow_symlinks: false
-        # The committer name and email address
-        committer: csmoe
-        # The author name and email address
-        author: csmoe@msn.com
         # Commit message
         commit_message: update blog
         # Write the given domain name to the CNAME file
