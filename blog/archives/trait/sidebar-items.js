@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"type":[["DeriveImplCopy","`derive(Copy)` vs `impl Copy`"]]};

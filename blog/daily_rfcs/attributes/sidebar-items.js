@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["_0003_attribute_usage","`libsyntax/ast.rs`"],["_0016_more_attributes","Allow attributes on more places inside functions, such as statements, blocks and expressions."],["_0049_match_arm_attributes","Allow attrubutes in `match` arms."],["_1990_external_doc_attribute","Imported code documentation from an external file."]]};

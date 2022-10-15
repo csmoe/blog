@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["_0001_private_fields","all struct fields are private by default"]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["_1624_loop_break_value","Allow `loop { ... }` expr returns a value via `break value`."]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["about_me","About me"],["archives","Rust trivials"],["daily_rfcs","Read RFCs everyday"]]};

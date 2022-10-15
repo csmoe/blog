@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["_0079_undefined_struct_layout","Leave structs with unspecified layout by default like enums."]]};

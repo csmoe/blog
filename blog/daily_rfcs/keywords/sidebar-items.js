@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["_0026_remove_priv","Remove `priv` keyword from rust-lang"]]};

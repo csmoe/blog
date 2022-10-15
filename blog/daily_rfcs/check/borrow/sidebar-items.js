@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["lifetime","RFCs about lifetime."]]};

@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Add the ability to have trait bounds that are polymorphic over lifetimes."><meta name="keywords" content="rust, rustlang, rust-lang, _0387_higher_ranked_trait_bounds"><title>blog::daily_rfcs::trait_sys::_0387_higher_ranked_trait_bounds - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../blog/index.html"><div class="logo-container"><img src="https://avatars.githubusercontent.com/u/35686186?v=4" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../blog/index.html"><div class="logo-container">
+                    <img src="https://avatars.githubusercontent.com/u/35686186?v=4" alt="logo"></div></a><h2 class="location"><a href="#">Module _0387_higher_ranked_trait_bounds</a></h2><div class="sidebar-elems"></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../blog/index.html">
+                        <img src="https://avatars.githubusercontent.com/u/35686186?v=4" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../../index.html">blog</a>::<wbr><a href="../../index.html">daily_rfcs</a>::<wbr><a href="../index.html">trait_sys</a>::<wbr><a class="mod" href="#">_0387_higher_ranked_trait_bounds</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../../src/blog/daily_rfcs/trait_sys/_0387_higher_ranked_trait_bounds.rs.html#1-44">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Add the ability to have trait bounds that are polymorphic over lifetimes.</p>
+<h3 id="note"><a href="#note">Note</a></h3><h4 id="syntax"><a href="#syntax">syntax</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">for</span><span class="op">&lt;</span><span class="ident">lifetimes</span><span class="op">&gt;</span> <span class="ident">Trait</span><span class="op">&lt;</span><span class="ident">T1</span>, ..., <span class="ident">Tn</span><span class="op">&gt;</span>
+<span class="kw">for</span><span class="op">&lt;</span><span class="ident">lifetimes</span><span class="op">&gt;</span> <span class="ident">Trait</span>(<span class="ident">T1</span>, ..., <span class="ident">tn</span>) -&gt; <span class="ident">Tr</span></code></pre></div>
+<ul>
+<li>Legal: in <code>where</code> clauses and types.</li>
+<li>Illegal: <code>impl</code> and qualified path <code>&lt;T as Trait&gt;</code></li>
+</ul>
+<p>Implicit binders are introduced for omitted lifetimes when using parentheses notation(<code>Trait(T1, ..., Tn)</code>) and in fn types(<code>for&lt;'a&gt; fn(&amp;'a T)</code>).</p>
+<h4 id="early_bound-vs-late_bound-lifetime-in-impls"><a href="#early_bound-vs-late_bound-lifetime-in-impls">Early_Bound vs Late_Bound lifetime in <code>impl</code>s</a></h4>
+<ul>
+<li>Early:
+<ul>
+<li>the <code>self</code> type of the impl;</li>
+<li>a <code>where</code> clause associated with the impl.</li>
+</ul>
+</li>
+<li>Late:
+<ul>
+<li>all other lifetimes.</li>
+</ul>
+</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Here &#39;late does not appear in any where clause nor in the self type,</span>
+<span class="comment">// and hence it is late-bound. Thus this impl is considered to provide:</span>
+<span class="comment">//</span>
+<span class="comment">//     SomeType : for&lt;&#39;late&gt; FnMut&lt;(&amp;&#39;late Foo,),()&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;late</span><span class="op">&gt;</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;late</span> <span class="ident">Foo</span>) -&gt; <span class="ident">Bar</span> <span class="kw">for</span> <span class="ident">SomeType</span> { ... }
+
+<span class="comment">// Here &#39;early appears in the self type and hence it is early bound.</span>
+<span class="comment">// This impl thus provides:</span>
+<span class="comment">//</span>
+<span class="comment">//     SomeOtherType&lt;&#39;early&gt; : FnMut&lt;(&amp;&#39;early Foo,),()&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;early</span><span class="op">&gt;</span> <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;early</span> <span class="ident">Foo</span>) -&gt; <span class="ident">Bar</span> <span class="kw">for</span> <span class="ident">SomeOtherType</span><span class="op">&lt;</span><span class="lifetime">&#39;early</span><span class="op">&gt;</span> { ... }</code></pre></div>
+<h4 id="instantiating-late-bound-lifetimes-in-a-trait-reference"><a href="#instantiating-late-bound-lifetimes-in-a-trait-reference">Instantiating late-bound lifetimes in a trait reference</a></h4>
+<ul>
+<li>Accessing an associated constant, once those are implemented.</li>
+<li>Accessing an associated type.</li>
+<li>Accessing an associated item from a trait reference.</li>
+</ul>
+<p><a href="https://github.com/rust-lang/rfcs/blob/master/text/0387-higher-ranked-trait-bounds.md">RFC: 0387-higher-ranked-trait-bounds</a></p>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="blog" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["_0085_pattern_macros","Allow macro expansion in patterns."],["_0160_if_let","Introduce `if let PAT = EXPR { BODY }` construct."]]};
